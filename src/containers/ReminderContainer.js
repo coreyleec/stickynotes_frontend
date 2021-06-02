@@ -8,15 +8,15 @@ class ReminderContainer extends React.Component{
     
         return(
             <div>
-                <CreateReminderForm addNote={this.props.addNote} />
+                <CreateReminderForm addReminder={this.props.addReminder} />
                 
                 
-                {/* {this.props.notes.map(note =>  */}
-                <Reminder 
-                //  updateNote={this.props.updateNote}  
+                {/* {this.props.reminders.map(note =>  */}
+                {/* <Reminder  */}
+                {/* //  updateNote={this.props.updateNote}  
                 //  deleteNote={this.props.deleteNote} 
                 //  key={note.id} note={note}
-                 />)}
+                 />)} */}
             </div>
         )
     }

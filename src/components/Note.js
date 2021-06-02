@@ -9,13 +9,23 @@ export default class Note extends React.Component{
         newNote: "",
     }
 
-toggleEdit = (e) => {
+
+
+    toggleEdit = (e) => {
     e.preventDefault()
-    this.setState({
+     this.setState({
         edit: !this.state.edit,
-        
     })
-}
+    }
+    toggleOff = (e) => {
+        // debugger
+        console.log(e.target.className)
+        if (e.target.className !== this.props.note.note) {
+        return this.setState({
+            edit: !this.state.edit,
+        })
+        } 
+    }
 
 handleUpdatedNote = (updatedNote) => {
     this.setState({
@@ -26,7 +36,8 @@ handleUpdatedNote = (updatedNote) => {
     render() {
         
        return(
-           <div key={this.props.note.id} className='note'>
+           <div onClick={(e)=> this.toggleOff(e)}
+            key={this.props.note.id} className='note'>
                
                <span>
         {/* NOTE TITLE */}
@@ -45,12 +56,14 @@ handleUpdatedNote = (updatedNote) => {
                    <input 
                    type="text" 
                    defaultValue={this.state.note} 
-                   name="updatedNote" 
+                //    name="updatedNote" 
+                      className={this.state.note}
                 //    value={this.state.updatedNote}
                    onChange={(e)=>this.handleUpdatedNote(e.target.value)}
                    ></input>
                </form>
-                : <h4 onClick={(e)=> this.toggleEdit(e)}>{this.state.note}</h4>}
+                : <h4  className={this.state.note} onClick={(e)=> this.toggleEdit(e)}>{this.state.note}</h4>}
+
                {/* onClick everywhere that isn't the form changes state */}
         {/* ARCHIVE BUTTON AND TIMESTAMP */}
                 <span>

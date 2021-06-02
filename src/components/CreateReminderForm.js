@@ -11,14 +11,19 @@ class CreateReminderForm extends React.Component{
 
     }
 
-    
+    handleSubmit = (e) => {
+        
+        this.setState({
+            [e.target.name]: e.target.value
+        })
+    }
 
     render() {
         // console.log(this.props.posts)
         return(
             <div className={"noteForm"}>
                 {/* <h3>Make a note or reminder</h3> */}
-               <form onSubmit={(e)=> this.props.addNote(e, this.state)}>
+               <form onSubmit={(e)=> this.props.addReminder(e, this.state)}>
                    
                    <input 
                    type="text" 

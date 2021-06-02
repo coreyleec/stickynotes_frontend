@@ -4,7 +4,7 @@ import Navbar from "../components/Navbar"
 import ArchiveContainer from "../containers/ArchiveContainer"
 import NoteContainer from "../containers/NoteContainer"
 import ReminderContainer from "../containers/ReminderContainer"
-import { BrowserRouter as Router, Route} from 'react-router-dom';
+import { BrowserRouter as Router, Route} from 'react-router-dom'
 import { Switch } from "react-router";
 
 class App extends React.Component {
@@ -119,9 +119,12 @@ archiveNote = (archiveData, noteObj) => {
         <Route exact path="/" component={() => 
         <NoteContainer  
         updateNote={this.updateNote} 
-        addNote={this.addNote}  
-        deleteNote={this.deleteNote} 
+        addNote={this.addNote}
+        deleteNote={this.deleteNote}
+        // {this.state.notes.filter(note = note.archived === false) 
+        // ? 
         notes={this.state.notes}
+        // : null}
         />} />
           
         <Route exact path="/archive" component={ () => 
@@ -133,7 +136,7 @@ archiveNote = (archiveData, noteObj) => {
 
         <Route exact path="/reminders" component={ () => 
         <ReminderContainer 
-        // reminderNotes={this.reminderNotes}
+        // addReminder={this.addReminder}
         archiveNote={this.archivedNotes} 
         deleteNote={this.deleteNote}  
         />} />
