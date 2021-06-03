@@ -33,6 +33,15 @@ class Reminder extends Component {
     }
 
     render() {
+
+        // if (this.props.reminder.datetime > Date().toLocaleString()) {
+        //     this.setState({
+        //         archived: false
+        //     })
+        // } else {
+        //     this.setState
+        // }
+
         return (
             <div onClick={(e) => this.toggleOff(e)}
                 key={this.props.reminder.id} className='note'>

@@ -2,7 +2,7 @@ import React from 'react'
 import DatePicker from 'react-datepicker';
 
 import "react-datepicker/dist/react-datepicker.css";
-import 'bootstrap/dist/css/bootstrap.min.css';
+
 
 class CreateReminderForm extends React.Component {
 
