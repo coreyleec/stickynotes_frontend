@@ -14,6 +14,7 @@ class App extends React.Component {
     reminders: [],
     // note: ""
     archived: false,
+    expiredReminders: []
   }
 
   // GET REQUEST
@@ -55,13 +56,11 @@ class App extends React.Component {
     e.preventDefault()
     let newReminder = {
       title: reminderObj.title,
+      reminder: reminderObj.reminder,
       datetime: new Date().toLocaleString(),
-      reminder_text: reminderObj.reminder_text,
-      reminder_date: new Date().toLocaleString(),
-      datetime: reminderObj.startDate
+      reminderdate: reminderObj.startDate,
+      archived: false,
       // image: noteObj.image,
-      // archived: false,
-      // details: [],
     }
 
     let reqObj = {}
@@ -79,7 +78,7 @@ class App extends React.Component {
   // PATCH REQUEST (update note)
   updateNote = (e, updatedNoteText, noteObj) => {
     e.preventDefault()
-    console.log(updatedNoteText)
+    // console.log(updatedNoteText)
     let updatedNote = {
       title: noteObj.title,
       note: updatedNoteText,
@@ -96,12 +95,19 @@ class App extends React.Component {
     fetch(`http://localhost:9292/notes/${noteObj.id}`, reqObj)
       .then(resp => resp.json())
       .then(newNoteObj => {
-        this.setState({ notes: [newNoteObj, ...this.state.notes] })
+        this.setState({ notes: this.state.notes.map(note => {
+          if(note.id === newNoteObj.id) return newNoteObj
+          else return note
+        })
+        })
       })
   }
+
+
+  
   updateReminder = (e, updatedReminderText, reminderObj) => {
     e.preventDefault()
-    console.log(updatedReminderText)
+    // console.log(updatedReminderText)
     let updatedReminder = {
       title: reminderObj.title,
       reminder_text: updatedReminderText,
@@ -140,46 +146,54 @@ class App extends React.Component {
       .then(() => this.setState({ reminders: newReminders }))
   }
 
+
   // ARCHIVE NOTE
   archiveNote = (archiveData, noteObj) => {
 
-    // console.log(favoriteData, postObj)  
+    console.log(archiveData, noteObj)  
+    // let reqObj = {}
+    // reqObj.headers = { 'Content-Type': 'Application/json' }
+    // reqObj.method = 'PATCH'
 
+    // noteObj.archived === false
+    //   ? reqObj.body = JSON.stringify({
+    //     archived: true
+    //   })
+    //   : reqObj.body = JSON.stringify({
+    //     archived: false
+    //   })
 
-    let reqObj = {}
-    reqObj.headers = { 'Content-Type': 'Application/json' }
-    reqObj.method = 'PATCH'
-
-    noteObj.archived === false
-      ? reqObj.body = JSON.stringify({
-        archived: true
-      })
-      : reqObj.body = JSON.stringify({
-        archived: false
-      })
-
-    fetch(`http://localhost:3000/notes/${noteObj.id}`, reqObj)
-      .then(resp => resp.json())
-      .then(updatedNoteObj => this.setState({
-        notes: this.state.notes.map(note => {
-          if (note.id === updatedNoteObj.id) return updatedNoteObj
-          else return note
-        })
-      }))
+    // fetch(`http://localhost:3000/notes/${noteObj.id}`, reqObj)
+    //   .then(resp => resp.json())
+    //   .then(updatedNoteObj => this.setState({
+    //     notes: this.state.notes.map(note => {
+    //       if (note.id === updatedNoteObj.id) return updatedNoteObj
+    //       else return note
+    //     })
+    //   }))
   }
+
+archiveTimer = () => {
+this.state.reminders.filter(reminder => reminder.reminder_date < new Date().toLocalString())
+}
+archiveReminder = (archiveNote, archiveStatus, reminderObj) => {
+  archiveNote(!this.props.note.archive, this.props.reminder)
+}
 
 
 
 
   render() {
-
-    console.log(this.state.notes, this.state.reminders)
+    console.log(this.state.reminders.map(reminder => reminder.reminderdate))
+    console.log(this.state.reminders)
+    // console.log(this.state.notes, this.state.reminders)
+    let archived
     return (
       <Router>
         <div>
           <Navbar />
           <br />
-          {/* <Switch> */}
+          
           <Route exact path="/" component={() =>
             <NoteContainer
               updateNote={this.updateNote}
@@ -202,11 +216,11 @@ class App extends React.Component {
             <ReminderContainer
               updateReminder={this.updateReminder}
               addReminder={this.addReminder}
-              archiveNote={this.archivedNotes}
+              archiveNote={this.archiveNotes}
               deleteReminder={this.deleteReminder}
               reminders={this.state.reminders}
             />} />
-          {/* </Switch> */}
+          
         </div>
       </Router>
     )

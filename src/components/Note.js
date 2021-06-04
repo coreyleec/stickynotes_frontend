@@ -68,8 +68,7 @@ export default class Note extends React.Component {
                 {/* onClick everywhere that isn't the form changes state */}
                 {/* ARCHIVE BUTTON AND TIMESTAMP */}
                 <span>
-                    <button onClick={() => this.props.archiveNote(!this.props.note.archive, this.props.note,
-                        this.props.note.archived !== null ? alert("Archived!") : alert("Unarchived :("))}>Archive</button>
+                    <button onClick={() => this.props.archiveNote(!this.props.note.archive, this.props.note)}>Archive</button>
                     <p>{this.props.note.datetime}</p>
                 </span>
             </div>

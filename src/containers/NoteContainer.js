@@ -12,8 +12,10 @@ class NoteContainer extends React.Component{
                 
                 
                 {this.props.notes.map(note => <Note 
+                 archiveNote={this.props.archiveNote}
                  updateNote={this.props.updateNote}  
-                 deleteNote={this.props.deleteNote} key={note.id} note={note}/>)}
+                 deleteNote={this.props.deleteNote} 
+                 key={note.id} note={note}/>)}
             </div>
         )
     }

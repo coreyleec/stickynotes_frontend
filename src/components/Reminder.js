@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 
 class Reminder extends Component {
     state = {
-        reminder_text: this.props.reminder.reminder_text,
+        reminder: this.props.reminder.reminder,
         edit: false,
         newReminder: "",
         archived: false
@@ -62,14 +62,14 @@ class Reminder extends Component {
                     ? <form onSubmit={(e) => this.props.updateReminder(e, this.state.newReminder, this.props.reminder)}>
                         <input
                             type="text"
-                            defaultValue={this.state.reminder_text}
+                            defaultValue={this.state.reminder}
                             //    name="updatedNote" 
                             className="inputText"
                             //    value={this.state.updatedNote}
                             onChange={(e) => this.handleUpdatedReminder(e.target.value)}
                         ></input>
                     </form>
-                    : <h4 className={this.state.reminder_text} onClick={(e) => this.toggleEdit(e)}>{this.state.reminder_text}</h4>}
+                    : <h4 className={this.state.reminder} onClick={(e) => this.toggleEdit(e)}>{this.state.reminder}</h4>}
 
                 {/* onClick everywhere that isn't the form changes state */}
                 {/* ARCHIVE BUTTON AND TIMESTAMP */}

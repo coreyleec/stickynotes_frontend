@@ -13,7 +13,7 @@ class CreateReminderForm extends React.Component {
         this.state = {
             title: "",
             // dateTime: "",
-            reminder_text: "",
+            reminder: "",
             // details: "",
             deadline: "",
             startDate: new Date()
@@ -64,8 +64,8 @@ class CreateReminderForm extends React.Component {
                     <input
                         type="text"
                         placeholder="Reminder"
-                        name="reminder_text"
-                        value={this.state.reminder_text}
+                        name="reminder"
+                        value={this.state.reminder}
                         onChange={(e) => this.handleSubmit(e)}
                     ></input>
                     <div className="form-group">
@@ -77,7 +77,7 @@ class CreateReminderForm extends React.Component {
                             timeFormat="HH:mm"
                             timeIntervals={20}
                             timeCaption="time"
-                            dateFormat="MMMM d, yyyy h:mm aa"
+                            dateFormat="MMMM d, yyyy h:mm"
 
                         />
 
